@@ -45,7 +45,12 @@ export class AuthController {
       role: userEntity.role,
     });
 
-    return new LoginPayloadDto(userEntity.toDto(), token);
+    return new LoginPayloadDto(
+      userEntity.toDto({
+        isActive: true,
+      }),
+      token,
+    );
   }
 
   @Post('register')
@@ -72,6 +77,6 @@ export class AuthController {
   @Auth([RoleType.USER, RoleType.ADMIN])
   @ApiOkResponse({ type: UserDto, description: 'current user info' })
   getCurrentUser(@AuthUser() user: UserEntity): UserDto {
-    return user.toDto();
+    return user.toDto({ isActive: true });
   }
 }

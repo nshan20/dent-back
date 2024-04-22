@@ -48,7 +48,7 @@
     "@nestjs/terminus": "^9.1.1",
     "@nestjs/typeorm": "^9.0.1",
     "aws-sdk": "^2.1324.0",
-    "bcrypt": "^5.0.1",
+    "bcrypt": "^5.1.1",
     "cache-manager-redis-store": "^2.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",

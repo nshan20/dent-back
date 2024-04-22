@@ -40,6 +40,6 @@ export class UserDto extends AbstractDto {
     this.email = user.email;
     this.avatar = user.avatar;
     this.phone = user.phone;
-    this.isActive = options?.isActive;
+    this.isActive = options.isActive;
   }
 }

@@ -1,29 +1,24 @@
-import './boilerplate.polyfill';
-
+import * as path from 'path';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { I18nModule } from 'nestjs-i18n';
-import * as path from 'path';
 
+import './boilerplate.polyfill';
 import { AuthModule } from './modules/auth/auth.module';
-import { CategoryModule } from './modules/category/category.module';
 import { HealthCheckerModule } from './modules/health-checker/health-checker.module';
-import { LabelModule } from './modules/label/label.module';
 import { PostModule } from './modules/post/post.module';
-import { ProductsModule } from './modules/products/products.module';
 import { UserModule } from './modules/user/user.module';
 import { ApiConfigService } from './shared/services/api-config.service';
 import { SharedModule } from './shared/shared.module';
+import { CalendarModule } from './modules/calendar/calendar.module';
 
 @Module({
   imports: [
     AuthModule,
     UserModule,
     PostModule,
-    LabelModule,
-    ProductsModule,
-    CategoryModule,
+    CalendarModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
