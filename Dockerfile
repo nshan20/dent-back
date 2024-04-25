@@ -8,8 +8,8 @@ ARG PORT=3000
 
 COPY . .
 
-RUN yarn install
+RUN npm install
 
 EXPOSE $PORT
 
-CMD [ "yarn", "start:prod" ]
+CMD [ "npm","run", "start:prod" ]
