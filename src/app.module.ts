@@ -12,6 +12,7 @@ import { UserModule } from './modules/user/user.module';
 import { ApiConfigService } from './shared/services/api-config.service';
 import { SharedModule } from './shared/shared.module';
 import { CalendarModule } from './modules/calendar/calendar.module';
+import { MedicalFormsModule } from './modules/medical-forms/medical-forms.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { CalendarModule } from './modules/calendar/calendar.module';
     UserModule,
     PostModule,
     CalendarModule,
+    MedicalFormsModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',

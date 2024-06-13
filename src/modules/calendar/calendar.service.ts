@@ -12,7 +12,7 @@ import { CalendarEntity } from './calendar.entity';
 import { CreateCalendarDto } from './dtos/create-calendar.dto';
 import type { UpdateCalendarDto } from './dtos/update-calendar.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 
 @Injectable()
 export class CalendarService {
@@ -36,6 +36,10 @@ export class CalendarService {
     calendarPageOptionsDto: CalendarPageOptionsDto,
   ): Promise<PageDto<CalendarDto>> {
     const queryBuilder = this.calendarRepository.createQueryBuilder('calendar');
+      if(calendarPageOptionsDto.q){
+
+        queryBuilder.andWhere({dayDate: Like(`%${calendarPageOptionsDto.q}%`)})
+      }
     const [items, pageMetaDto] = await queryBuilder.paginate(
       calendarPageOptionsDto,
     );
