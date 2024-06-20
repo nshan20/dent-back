@@ -70,6 +70,7 @@ export class PostController {
 
   @Put(':id')
   @HttpCode(HttpStatus.ACCEPTED)
+  @Auth([])
   @ApiAcceptedResponse()
   updatePost(
     @UUIDParam('id') id: string,
@@ -79,6 +80,7 @@ export class PostController {
   }
 
   @Delete(':id')
+  @Auth([])
   @HttpCode(HttpStatus.ACCEPTED)
   @ApiAcceptedResponse()
   async deletePost(@UUIDParam('id') id: string): Promise<void> {

@@ -36,7 +36,9 @@ export class CalendarController {
   @Get()
   @Auth([])
   @HttpCode(HttpStatus.OK)
-  getAllCalendar(@Query() calendarPageOptionsDto: CalendarPageOptionsDto): Promise<PageDto<CalendarDto>> {
+  getAllCalendar(
+    @Query() calendarPageOptionsDto: CalendarPageOptionsDto,
+  ): Promise<PageDto<CalendarDto>> {
     return this.calendarService.getAllCalendar(calendarPageOptionsDto);
   }
 
@@ -50,6 +52,7 @@ export class CalendarController {
   }
 
   @Put(':id')
+  @Auth([])
   @HttpCode(HttpStatus.ACCEPTED)
   updateCalendar(
     @UUIDParam('id') id: Uuid,
@@ -59,6 +62,7 @@ export class CalendarController {
   }
 
   @Delete(':id')
+  @Auth([])
   @HttpCode(HttpStatus.ACCEPTED)
   async deleteCalendar(@UUIDParam('id') id: Uuid): Promise<void> {
     await this.calendarService.deleteCalendar(id);

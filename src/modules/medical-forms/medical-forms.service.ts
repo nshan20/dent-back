@@ -24,19 +24,23 @@ export class MedicalFormsService {
   ) {}
 
   @Transactional()
-  createMedicalForms(createMedicalFormsDto: CreateMedicalFormsDto): Promise<MedicalFormsEntity> {
-    return this.commandBus.execute<CreateMedicalFormsCommand, MedicalFormsEntity>(
-      new CreateMedicalFormsCommand(createMedicalFormsDto),
-    );
+  createMedicalForms(
+    createMedicalFormsDto: CreateMedicalFormsDto,
+  ): Promise<MedicalFormsEntity> {
+    return this.commandBus.execute<
+      CreateMedicalFormsCommand,
+      MedicalFormsEntity
+    >(new CreateMedicalFormsCommand(createMedicalFormsDto));
   }
 
   async getAllMedicalForms(
     medicalFormsPageOptionsDto: MedicalFormsPageOptionsDto,
   ): Promise<PageDto<MedicalFormsDto>> {
-    const queryBuilder = this.medicalFormsRepository
-      .createQueryBuilder('medicalForms')
-      .leftJoinAndSelect('medicalForms.translations', 'medicalFormsTranslation');
-    const [items, pageMetaDto] = await queryBuilder.paginate(medicalFormsPageOptionsDto);
+    const queryBuilder =
+      this.medicalFormsRepository.createQueryBuilder('medicalForms');
+    const [items, pageMetaDto] = await queryBuilder.paginate(
+      medicalFormsPageOptionsDto,
+    );
 
     return items.toPageDto(pageMetaDto);
   }
@@ -69,9 +73,12 @@ export class MedicalFormsService {
       throw new MedicalFormsNotFoundException();
     }
 
-    this.medicalFormsRepository.merge(medicalFormsEntity, updateMedicalFormsDto);
+    const updatedForm = this.medicalFormsRepository.merge(
+      medicalFormsEntity,
+      updateMedicalFormsDto,
+    );
 
-    await this.medicalFormsRepository.save(updateMedicalFormsDto);
+    await this.medicalFormsRepository.save(updatedForm);
   }
 
   async deleteMedicalForms(id: Uuid): Promise<void> {

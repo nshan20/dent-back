@@ -27,8 +27,12 @@ export class MedicalFormsController {
   @Post()
   @Auth([])
   @HttpCode(HttpStatus.CREATED)
-  async createMedicalForms(@Body() createMedicalFormsDto: CreateMedicalFormsDto) {
-    const entity = await this.medicalFormsService.createMedicalForms(createMedicalFormsDto);
+  async createMedicalForms(
+    @Body() createMedicalFormsDto: CreateMedicalFormsDto,
+  ) {
+    const entity = await this.medicalFormsService.createMedicalForms(
+      createMedicalFormsDto,
+    );
 
     return entity.toDto();
   }
@@ -36,29 +40,40 @@ export class MedicalFormsController {
   @Get()
   @Auth([])
   @HttpCode(HttpStatus.OK)
-  getAllMedicalForms(@Query() medicalFormsPageOptionsDto: MedicalFormsPageOptionsDto): Promise<PageDto<MedicalFormsDto>> {
-    return this.medicalFormsService.getAllMedicalForms(medicalFormsPageOptionsDto);
+  getAllMedicalForms(
+    @Query() medicalFormsPageOptionsDto: MedicalFormsPageOptionsDto,
+  ): Promise<PageDto<MedicalFormsDto>> {
+    return this.medicalFormsService.getAllMedicalForms(
+      medicalFormsPageOptionsDto,
+    );
   }
 
   @Get(':id')
   @Auth([])
   @HttpCode(HttpStatus.OK)
-  async getSingleMedicalForms(@UUIDParam('id') id: Uuid): Promise<MedicalFormsDto> {
+  async getSingleMedicalForms(
+    @UUIDParam('id') id: Uuid,
+  ): Promise<MedicalFormsDto> {
     const entity = await this.medicalFormsService.getSingleMedicalForms(id);
 
     return entity.toDto();
   }
 
   @Put(':id')
+  @Auth([])
   @HttpCode(HttpStatus.ACCEPTED)
   updateMedicalForms(
     @UUIDParam('id') id: Uuid,
     @Body() updateMedicalFormsDto: UpdateMedicalFormsDto,
   ): Promise<void> {
-    return this.medicalFormsService.updateMedicalForms(id, updateMedicalFormsDto);
+    return this.medicalFormsService.updateMedicalForms(
+      id,
+      updateMedicalFormsDto,
+    );
   }
 
   @Delete(':id')
+  @Auth([])
   @HttpCode(HttpStatus.ACCEPTED)
   async deleteMedicalForms(@UUIDParam('id') id: Uuid): Promise<void> {
     await this.medicalFormsService.deleteMedicalForms(id);
