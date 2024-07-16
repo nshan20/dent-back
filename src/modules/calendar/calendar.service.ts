@@ -21,7 +21,8 @@ export class CalendarService {
     private calendarRepository: Repository<CalendarEntity>,
     private validatorService: ValidatorService,
     private commandBus: CommandBus,
-  ) {}
+  ) {
+  }
 
   @Transactional()
   createCalendar(
@@ -36,10 +37,12 @@ export class CalendarService {
     calendarPageOptionsDto: CalendarPageOptionsDto,
   ): Promise<PageDto<CalendarDto>> {
     const queryBuilder = this.calendarRepository.createQueryBuilder('calendar');
-      if(calendarPageOptionsDto.q){
 
-        queryBuilder.andWhere({dayDate: Like(`%${calendarPageOptionsDto.q}%`)})
-      }
+    if (calendarPageOptionsDto.dayDate) {
+      queryBuilder.andWhere({ dayDate: Like(`%${calendarPageOptionsDto.dayDate}%`) });
+    }
+    queryBuilder.orderBy('calendar.dayDate','ASC');
+
     const [items, pageMetaDto] = await queryBuilder.paginate(
       calendarPageOptionsDto,
     );

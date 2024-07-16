@@ -32,4 +32,22 @@ export class PageOptionsDto {
 
   @StringFieldOptional()
   readonly q?: string;
+
+  @StringFieldOptional()
+  readonly name?: string;
+
+  @StringFieldOptional()
+  readonly lastName?: string;
+
+  @StringFieldOptional()
+  readonly surName?: string;
+
+  @StringFieldOptional()
+  readonly age?: string;
+
+  @StringFieldOptional()
+  readonly phoneNumber?: string;
+
+  @StringFieldOptional()
+  readonly dayDate?: any;
 }

@@ -12,7 +12,7 @@ import { MedicalFormsEntity } from './medical-forms.entity';
 import { CreateMedicalFormsDto } from './dtos/create-medical-forms.dto';
 import type { UpdateMedicalFormsDto } from './dtos/update-medical-forms.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 
 @Injectable()
 export class MedicalFormsService {
@@ -36,11 +36,36 @@ export class MedicalFormsService {
   async getAllMedicalForms(
     medicalFormsPageOptionsDto: MedicalFormsPageOptionsDto,
   ): Promise<PageDto<MedicalFormsDto>> {
-    const queryBuilder =
-      this.medicalFormsRepository.createQueryBuilder('medicalForms');
+    const queryBuilder = this.medicalFormsRepository.createQueryBuilder('medicalForms');
+
+    if(medicalFormsPageOptionsDto.name){
+      queryBuilder.andWhere({name: Like(`%${medicalFormsPageOptionsDto.name}%`)})
+    }
+
+    if (medicalFormsPageOptionsDto.lastName) {
+      queryBuilder.andWhere({lastName: Like(`%${medicalFormsPageOptionsDto.lastName}%`)})
+    }
+
+    if (medicalFormsPageOptionsDto.surName) {
+      queryBuilder.andWhere({surName: Like(`%${medicalFormsPageOptionsDto.surName}%`)})
+    }
+
+    if (medicalFormsPageOptionsDto.age) {
+      queryBuilder.andWhere({age: Like(`%${medicalFormsPageOptionsDto.age}%`)})
+    }
+
+    if (medicalFormsPageOptionsDto.phoneNumber) {
+      queryBuilder.andWhere({phoneNumber: Like(`%${medicalFormsPageOptionsDto.phoneNumber}%`)})
+    }
+
+
     const [items, pageMetaDto] = await queryBuilder.paginate(
       medicalFormsPageOptionsDto,
     );
+
+
+
+
 
     return items.toPageDto(pageMetaDto);
   }

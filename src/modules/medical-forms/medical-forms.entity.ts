@@ -10,27 +10,27 @@ import { MedicalFormsDto } from './dtos/medical-forms.dto';
 export class MedicalFormsEntity extends AbstractEntity<MedicalFormsDto,
   IMedicalFormsDtoOptions
 > {
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   lastName: string;
 
-  @Column()
+  @Column({ nullable: true })
   surName: string;
 
-  @Column()
+  @Column({ nullable: true })
   age: string;
 
-  @Column()
+  @Column({ nullable: true })
   phoneNumber: string;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
-  @Column()
+  @Column({ nullable: true })
   urlFail: string;
 
-  @Column()
+  @Column({ nullable: true })
   registerDate: string;
 }
