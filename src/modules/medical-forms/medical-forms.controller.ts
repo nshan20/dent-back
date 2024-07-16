@@ -33,7 +33,6 @@ export class MedicalFormsController {
     const entity = await this.medicalFormsService.createMedicalForms(
       createMedicalFormsDto,
     );
-
     return entity.toDto();
   }
 

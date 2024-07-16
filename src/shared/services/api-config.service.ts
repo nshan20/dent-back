@@ -5,6 +5,7 @@ import { isNil } from 'lodash';
 
 import { UserSubscriber } from '../../entity-subscribers/user-subscriber';
 import { SnakeNamingStrategy } from '../../snake-naming.strategy';
+import { CreatedByUpdatedBySubscriber } from '../../entity-subscribers/created-by-updated-by.subscriber';
 
 @Injectable()
 export class ApiConfigService {
@@ -102,7 +103,7 @@ export class ApiConfigService {
       username: this.getString('DB_USERNAME'),
       password: this.getString('DB_PASSWORD'),
       database: this.getString('DB_DATABASE'),
-      subscribers: [UserSubscriber],
+      subscribers: [UserSubscriber, CreatedByUpdatedBySubscriber],
       migrationsRun: true,
       ssl: {
         require: true,

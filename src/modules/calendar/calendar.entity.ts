@@ -16,4 +16,5 @@ export class CalendarEntity extends AbstractEntity<
 
   @Column('text')
   dayInfo: string;
+
 }
