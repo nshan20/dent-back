@@ -43,6 +43,12 @@ export abstract class AbstractEntity<
   })
   updatedAt: Date;
 
+  @Column({ nullable: true, default: () => 'CURRENT_USER' })
+  createdBy: string;
+
+  @Column({ nullable: true, default: () => 'CURRENT_USER' })
+  updatedBy: string;
+
   translations?: AbstractTranslationEntity[];
 
   private dtoClass?: Constructor<DTO, [AbstractEntity, O?]>;

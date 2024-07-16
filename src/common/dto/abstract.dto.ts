@@ -14,13 +14,21 @@ export class AbstractDto {
   @ApiProperty()
   updatedAt: Date;
 
+  @ApiProperty()
+  createdBy: string;
+
+  @ApiProperty()
+  updatedBy: string;
+
   translations?: AbstractTranslationDto[];
 
   constructor(entity: AbstractEntity, options?: { excludeFields?: boolean }) {
     if (!options?.excludeFields) {
       this.id = entity.id;
       this.createdAt = entity.createdAt;
-      this.updatedAt = entity.updatedAt;
+      this.createdAt = entity.createdAt;
+      this.createdBy = entity.createdBy;
+      this.updatedBy = entity.updatedBy;
     }
 
     const languageCode = ContextProvider.getLanguage();
